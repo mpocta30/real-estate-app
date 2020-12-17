@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Alert, Modal } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const history = useHistory();
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +18,8 @@ const Login = (props) => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      // history.push("/");
+      window.location.reload(false);
     } catch {
       setError("Failed to sign in");
     }
@@ -29,7 +29,7 @@ const Login = (props) => {
 
   return (
     <>
-      <Modal show={props.show} onHide={props.onClose}>
+      <Modal show={props.show} onHide={props.onClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
