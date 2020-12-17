@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
-export default function UpdateProfile() {
+const UpdateProfile = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -12,7 +12,7 @@ export default function UpdateProfile() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
@@ -39,7 +39,7 @@ export default function UpdateProfile() {
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
 
   return (
     <div>
@@ -84,4 +84,6 @@ export default function UpdateProfile() {
       </div>
     </div>
   );
-}
+};
+
+export default UpdateProfile;

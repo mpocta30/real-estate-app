@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Card, Button, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useAuth } from "../../contexts/AuthContext/AuthContext";
+import { useHistory } from "react-router-dom";
+import Hero from "../../components/Hero/Hero";
 
-export default function Dashboard() {
-  const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+const Dashboard = () => {
+  const { logout } = useAuth();
   const history = useHistory();
+  const [error, setError] = useState("");
 
-  async function handleLogout() {
+  let handleLogout = async () => {
     setError("");
 
     try {
@@ -17,11 +18,13 @@ export default function Dashboard() {
     } catch {
       setError("Failed to log out");
     }
-  }
+  };
 
   return (
     <>
-      <Card>
+      <Hero />
+
+      {/* <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -36,7 +39,9 @@ export default function Dashboard() {
         <Button variant="link" onClick={handleLogout}>
           Log Out
         </Button>
-      </div>
+      </div> */}
     </>
   );
-}
+};
+
+export default Dashboard;
